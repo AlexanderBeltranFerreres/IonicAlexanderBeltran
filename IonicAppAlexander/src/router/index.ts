@@ -10,13 +10,13 @@ const routes = [
         path: '/home',
         name: 'Home',
         component: HomePage,
-        // Aquí protegemos la ruta
+        // PROTEGIM
         beforeEnter: (to, from, next) => {
             const token = localStorage.getItem('token');
             if (token) {
-                next(); // Permite el acceso a la ruta
+                next(); // Permetem l'accés
             } else {
-                next('/login'); // Redirige a login si no hay token
+                next('/login'); // redireect al login
             }
         }
     },
@@ -28,9 +28,9 @@ const routes = [
         beforeEnter: (to, from, next) => {
             const token = localStorage.getItem('token');
             if (token) {
-                next(); // Permite el acceso a la ruta
+                next();
             } else {
-                next('/login'); // Redirige a login si no hay token
+                next('/login'); // redirect login
             }
         }
     },
@@ -42,9 +42,9 @@ const routes = [
         beforeEnter: (to, from, next) => {
             const token = localStorage.getItem('token');
             if (token) {
-                next(); // Permite el acceso a la ruta
+                next();
             } else {
-                next('/login'); // Redirige a login si no hay token
+                next('/login');
             }
         }
     },

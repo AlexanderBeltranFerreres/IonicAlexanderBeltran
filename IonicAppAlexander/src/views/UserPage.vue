@@ -98,22 +98,22 @@ onMounted(getUserFiles);
 </script>
 
 <style scoped>
-
-ion-label{
+ion-label {
   display: flex;
   flex-direction: column;
-
-  img{
-    width: 100px;
-  }
 }
+
+ion-label img {
+  width: 100px;
+}
+
 ion-content {
-  --background: #f9fafb;
+  --background: #f4f7f6; /* Verd clar (secundari) */
   padding-bottom: 80px; /* Espai per als botons */
 }
 
 .logout-button {
-  background-color: #e74c3c;
+  background-color: #e74c3c; /* Vermell (primari) */
   margin: 10px 0;
   color: white;
   font-size: 16px;
@@ -122,11 +122,11 @@ ion-content {
 }
 
 .logout-button:hover {
-  background-color: #c0392b;
+  background-color: #c0392b; /* Vermell fosc (secundari) */
 }
 
 ion-header {
-  --background: #3498db;
+  --background: #2ecc71; /* Verd (primari) */
 }
 
 ion-title {
@@ -160,7 +160,7 @@ ion-title {
 }
 
 .delete-button {
-  background-color: #e74c3c;
+  background-color: #e74c3c; /* Vermell (primari) */
   color: white;
   font-weight: bold;
   border-radius: 8px;
@@ -168,7 +168,7 @@ ion-title {
 }
 
 .delete-button:hover {
-  background-color: #c0392b;
+  background-color: #c0392b; /* Vermell fosc (secundari) */
 }
 
 @media (max-width: 767px) {
@@ -182,4 +182,5 @@ ion-title {
     width: 100%;
   }
 }
+
 </style>

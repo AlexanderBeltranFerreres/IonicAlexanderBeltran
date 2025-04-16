@@ -126,7 +126,7 @@ export default defineComponent({
 
 <style scoped>
 ion-content {
-  --background: #f4f7f6;
+  --background: #f9fafb; /* Blau clar (primari) */
 }
 
 .auth-card {
@@ -145,13 +145,13 @@ ion-card-header {
 ion-card-title {
   font-size: 22px;
   font-weight: 600;
-  color: #333;
+  color: #8e44ad; /* Violeta (primari) */
 }
 
 ion-button {
   margin-top: 15px;
   border-radius: 10px;
-  background: #3498db;
+  background: #e74c3c; /* Vermell (primari) */
   color: white;
   font-weight: bold;
   transition: background 0.3s ease;
@@ -159,11 +159,11 @@ ion-button {
 }
 
 ion-button:hover {
-  background: #2980b9;
+  background: #c0392b; /* Vermell fosc (secundari) */
 }
 
 .switch-btn {
-  color: white !important; /* Assegura que el text sigui blanc */
+  color: white !important;
   font-weight: 600;
   text-align: center;
 }
@@ -178,7 +178,7 @@ ion-label {
 
 ion-input {
   border-radius: 10px;
-  background-color: #f4f7f6;
+  background-color: #f4f7f6; /* Verd clar (secundari) */
   padding: 10px;
   font-size: 16px;
 }
@@ -191,4 +191,5 @@ footer {
   margin-top: 40px;
   text-align: center;
 }
+
 </style>

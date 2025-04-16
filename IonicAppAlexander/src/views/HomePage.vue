@@ -115,15 +115,15 @@ onMounted(getMultimedia);
 
 <style scoped>
 ion-content {
-  --background: #f4f7f6;
-  padding-bottom: 60px; /* Espai per al botó flotant */
+  --background: #f9fafb; /* Blau clar (primari) */
+  padding-bottom: 60px;
 }
 
 .upload-button {
   position: fixed;
   bottom: 70px;
   right: 20px;
-  background-color: #3498db;
+  background-color: #8e44ad; /* Violeta (primari) */
   border-radius: 10px;
   height: 60px;
   width: 60px;
@@ -135,7 +135,7 @@ ion-content {
 }
 
 .upload-button:hover {
-  background-color: #2980b9;
+  background-color: #9b59b6; /* Violeta clar (secundari) */
 }
 
 .upload-icon {
@@ -155,7 +155,7 @@ ion-card {
 }
 
 ion-card-header {
-  background-color: #f9f9f9;
+  background-color: #f4f7f6; /* Verd clar (secundari) */
   padding: 10px;
   border-top-left-radius: 12px;
   border-top-right-radius: 12px;
@@ -178,7 +178,7 @@ ion-item {
 ion-label p {
   margin: 5px 0;
   font-size: 14px;
-  color: #666;
+  color: #777; /* Grís (secundari) */
 }
 
 ion-card-footer {
@@ -207,4 +207,5 @@ ion-card-footer ion-label {
     padding: 5px;
   }
 }
+
 </style>
