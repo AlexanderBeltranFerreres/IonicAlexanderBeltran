@@ -1,0 +1,7 @@
+{
+  "name": "IonicAppAlexander",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "vue-vite"
+}
