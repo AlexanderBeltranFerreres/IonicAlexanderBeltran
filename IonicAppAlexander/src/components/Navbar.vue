@@ -1,20 +1,17 @@
 <template>
   <ion-header>
-    <ion-toolbar>
+    <ion-toolbar class="custom-toolbar">
       <ion-buttons slot="start" v-if="token">
-        <!-- Botó Home que apareix només si hi ha token -->
-        <ion-button @click="goToHome">
+        <ion-button class="icon-button" @click="goToHome">
           <img src="@/assets/home.png" alt="home" class="icon" />
         </ion-button>
       </ion-buttons>
 
-      <!-- Títol centrat -->
       <ion-title class="center-title">{{ title }}</ion-title>
 
       <ion-buttons slot="end" v-if="token">
-        <!-- Botó Persona que apareix només si hi ha token -->
-        <ion-button @click="goToUser">
-          <img src="@/assets/user.png" alt="persona" class="icon" />
+        <ion-button class="icon-button" @click="goToUser">
+          <img src="@/assets/user.png" alt="user" class="icon" />
         </ion-button>
       </ion-buttons>
     </ion-toolbar>
@@ -93,16 +90,47 @@ onMounted(checkToken);
 </script>
 
 <style scoped>
-/* Aquí pots afegir estil per personalitzar el navbar */
-.icon {
-  width: 24px;  /* Ajusta la mida de l'icona */
-  height: 24px; /* Ajusta la mida de l'icona */
-  object-fit: contain; /* Per mantenir la proporció de l'icona */
+.custom-toolbar {
+  --background: linear-gradient(90deg, #c94b4b, #4b134f); /* degradat roseta */
+  --color: white;
+  min-height: 64px;
+  display: flex;
+  align-items: center;
+  padding: 0 16px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-/* Centrar el títol */
+.icon-button {
+  background-color: #ffffff;
+  border-radius: 50%;
+  width: 44px;
+  height: 44px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  transition: background-color 0.2s ease;
+}
+
+.icon-button:hover {
+  background-color: #f7d5e3; /* to rosadet suau al hover */
+}
+
+.icon {
+  width: 22px;
+  height: 22px;
+  object-fit: contain;
+  pointer-events: none; /* Evita problemes de clic */
+}
+
 .center-title {
   flex: 1;
   text-align: center;
+  font-weight: 600;
+  font-size: 20px;
+  color: white;
+  padding-right: 44px; /* per compensar el botó de la dreta */
 }
 </style>

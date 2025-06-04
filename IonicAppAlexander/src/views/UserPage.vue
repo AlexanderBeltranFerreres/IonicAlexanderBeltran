@@ -1,37 +1,39 @@
 <template>
   <ion-page>
-    <Navbar title="Perfil d'Usuari"/>
+    <Navbar title="ELS MEUS FITXERS" />
 
     <ion-content>
       <!-- Botó per tancar sessió -->
-      <ion-button expand="full" class="logout-button" @click="logout">
-        Tancar Sessió
-      </ion-button>
+      <div class="logout-container">
+        <ion-button class="logout-button" @click="logout">
+          Tancar Sessió
+        </ion-button>
+      </div>
 
-      <!-- Llista de fitxers de l'usuari -->
+      <!-- Llista de fitxers -->
       <ion-list class="file-list">
         <ion-item v-for="(item, index) in userFiles" :key="index" class="file-item">
+          <ion-card-header>
+            <img :src="getPreviewSrc(item)" alt="Previsualització" />
+          </ion-card-header>
           <ion-label>
-            <ion-card-header>
-              <img :src="getPreviewSrc(item)" alt="Previsualització"/>
-            </ion-card-header>
             <p class="file-date">Creat: {{ formatDate(item.created_at) }}</p>
             <p class="file-date">Modificat: {{ formatDate(item.updated_at) }}</p>
           </ion-label>
-          <ion-button color="none" class="delete-button" @click="deleteFile(item.id)">
+          <ion-button class="delete-button" @click="deleteFile(item.id)">
             Eliminar
           </ion-button>
         </ion-item>
       </ion-list>
 
-      <Footer/>
+      <Footer />
     </ion-content>
   </ion-page>
 </template>
 
 <script setup>
-import {ref, onMounted} from 'vue';
-import {useRouter} from 'vue-router';
+import { ref, onMounted } from 'vue';
+import { useRouter } from 'vue-router';
 import api from '../services/api';
 import Navbar from '../components/Navbar.vue';
 import Footer from '../components/Footer.vue';
@@ -39,39 +41,28 @@ import Footer from '../components/Footer.vue';
 const router = useRouter();
 const userFiles = ref([]);
 
-// Funció per obtenir els fitxers de l'usuari
 const getUserFiles = async () => {
   try {
-    const response = await api.get(`/multimedia/user`); // Aquí passes el userId
+    const response = await api.get(`/multimedia/user`);
     userFiles.value = response.data;
   } catch (error) {
     console.error('Error obtenint fitxers:', error);
   }
 };
 
-// Funció per formatar la data
 const formatDate = (dateString) => {
   const date = new Date(dateString);
-  return date.toLocaleString(); // Potser vulguis personalitzar més el format
+  return date.toLocaleString();
 };
 
-// Funció per tancar sessió
-const logout = async () => {
-  try {
-    localStorage.removeItem('token');
-    router.push('/login').then(() => {
-      window.location.reload();  // Forçar recàrrega
-    }); // Redirigeix a la pàgina de login
-  } catch (error) {
-    console.error('Error logging out:', error);
-  }
+const logout = () => {
+  localStorage.removeItem('token');
+  router.push('/login').then(() => window.location.reload());
 };
 
-// Funció per eliminar un fitxer
 const deleteFile = async (fileId) => {
   try {
     await api.delete(`/multimedia/${fileId}`);
-    // Un cop eliminat el fitxer, actualitza la llista
     userFiles.value = userFiles.value.filter(file => file.id !== fileId);
   } catch (error) {
     console.error('Error deleting file:', error);
@@ -82,7 +73,6 @@ import videoIcon from '@/assets/video.png';
 import documentIcon from '@/assets/docs.png';
 
 const getPreviewSrc = (item) => {
-  console.log(item);
   if (item.file_type.startsWith('image/')) {
     return `data:image/jpeg;base64,${item.file_path}`;
   } else if (item.file_type.startsWith('video/')) {
@@ -92,95 +82,139 @@ const getPreviewSrc = (item) => {
   }
 };
 
-
-// Carregar els fitxers de l'usuari al muntar la pàgina
 onMounted(getUserFiles);
 </script>
 
 <style scoped>
-ion-label {
-  display: flex;
-  flex-direction: column;
-}
-
-ion-label img {
-  width: 100px;
-}
-
 ion-content {
-  --background: #f4f7f6; /* Verd clar (secundari) */
-  padding-bottom: 80px; /* Espai per als botons */
+  --background: linear-gradient(135deg, #fce3ec, #ffe6fa);
+  padding: 16px;
+  padding-bottom: 80px;
+  font-family: 'Segoe UI', Roboto, sans-serif;
 }
 
-.logout-button {
-  background-color: #e74c3c; /* Vermell (primari) */
-  margin: 10px 0;
-  color: white;
-  font-size: 16px;
-  font-weight: bold;
-  border-radius: 8px;
+/* Botó de tancar sessió posicionat a la part superior dreta */
+.logout-container {
+  display: flex;
+  justify-content: flex-end;
+  padding: 8px 16px 0;
 }
 
-.logout-button:hover {
-  background-color: #c0392b; /* Vermell fosc (secundari) */
+ion-button.logout-button {
+  --background: linear-gradient(135deg, #ff6ec4, #7873f5);
+  --color: white;
+  --border-radius: 12px;
+  --box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+  font-size: 15px;
+  font-weight: 600;
+  padding: 10px 20px;
+  transition: transform 0.2s ease, box-shadow 0.3s ease;
 }
 
-ion-header {
-  --background: #2ecc71; /* Verd (primari) */
+ion-button.logout-button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
 }
 
-ion-title {
-  color: white;
-}
-
+/* Llista de fitxers */
 .file-list {
-  margin-top: 20px;
+  margin-top: 12px;
+  padding: 0 8px;
 }
 
 .file-item {
+  background: linear-gradient(135deg, #ffffff, #f9f9ff);
+  border-radius: 18px;
+  box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.08);
+  padding: 12px;
+  margin-bottom: 16px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+  /* Layout horitzontal amb imatge petita */
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  padding: 15px;
-  margin-bottom: 10px;
-  background-color: white;
-  border-radius: 10px;
-  box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);
+  gap: 16px;
 }
 
-.file-title {
-  font-size: 16px;
-  color: #333;
-  font-weight: bold;
+.file-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 26px rgba(0, 0, 0, 0.12);
+}
+
+ion-card-header {
+  background-color: #f0f4ff;
+  padding: 0;
+  border-radius: 12px;
+  overflow: hidden;
+
+  width: 100px;
+  height: 100px;
+  flex-shrink: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+ion-card-header img {
+  width: auto;
+  max-width: 100%;
+  height: 80px;
+  object-fit: contain;
+  object-position: center;
+  border-bottom: none;
+}
+
+ion-label {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  flex-grow: 1;
 }
 
 .file-date {
-  font-size: 14px;
-  color: #777;
+  font-size: 13px;
+  color: #666;
+  font-style: italic;
+  margin: 2px 0;
 }
 
 .delete-button {
-  background-color: #e74c3c; /* Vermell (primari) */
-  color: white;
-  font-weight: bold;
-  border-radius: 8px;
-  padding: 5px 15px;
+  --background: linear-gradient(135deg, #ff6b6b, #f94d6a);
+  --color: white;
+  font-weight: 600;
+  border-radius: 10px;
+  padding: 8px 16px;
+  margin-left: auto;
+  transition: background 0.3s ease, transform 0.2s ease;
 }
 
 .delete-button:hover {
-  background-color: #c0392b; /* Vermell fosc (secundari) */
+  background: linear-gradient(135deg, #e53935, #d81b60);
+  transform: scale(1.05);
 }
 
+/* Responsive */
 @media (max-width: 767px) {
   .file-item {
     flex-direction: column;
     align-items: flex-start;
   }
 
-  .delete-button {
-    margin-top: 10px;
+  ion-card-header {
+    width: 100%;
+    height: auto;
+  }
+
+  ion-card-header img {
+    height: 180px;
     width: 100%;
   }
-}
 
+  .delete-button {
+    width: 100%;
+    margin-left: 0;
+    margin-top: 12px;
+  }
+}
 </style>
+

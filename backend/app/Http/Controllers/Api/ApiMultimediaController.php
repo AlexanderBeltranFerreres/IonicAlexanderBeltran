@@ -65,7 +65,7 @@ class ApiMultimediaController extends Controller
         $multimedia = Multimedia::where('user_id', $user->id)->get();
 
         $multimedia->map(function ($item) {
-            // Llegir el fitxer del sistema de fitxers local
+            // Llegir el fitxer del sistema
             $filePath = storage_path("app/public/{$item->file_path}");
 
             if (file_exists($filePath)) {
@@ -80,11 +80,11 @@ class ApiMultimediaController extends Controller
     }
 
 
-    // Eliminar un contingut multimèdia (només si és de l'usuari)
+    // Eliminar fitxer de l'usuari
     public function destroy($id)
     {
         $multimedia = Multimedia::findOrFail($id);
-
+        //si el fitxer no es de l'usuari
         if ($multimedia->user_id !== Auth::id()) {
             return response()->json(['message' => 'Unauthorized'], 403);
         }

@@ -9,7 +9,7 @@ class Multimedia extends Model
 {
     use HasFactory;
 
-    // Afegeix 'user_id' a la propietat fillable
+    // Afegim 'user_id' a la propietat fillable
     protected $fillable = [
         'file_path',
         'file_type',

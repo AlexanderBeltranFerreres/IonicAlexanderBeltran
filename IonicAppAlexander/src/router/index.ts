@@ -38,7 +38,6 @@ const routes = [
         path: '/user',
         name: 'User',
         component: UserPage,
-        // Aquí protegemos la ruta
         beforeEnter: (to, from, next) => {
             const token = localStorage.getItem('token');
             if (token) {

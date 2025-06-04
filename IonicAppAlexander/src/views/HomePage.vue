@@ -1,6 +1,6 @@
 <template>
   <ion-page>
-    <Navbar title="Llista d'Arxius"/>
+    <Navbar title="TOTS ELS ARXIUS"/>
 
     <ion-content>
       <!-- Botó flotant per pujar un fitxer -->
@@ -115,97 +115,146 @@ onMounted(getMultimedia);
 
 <style scoped>
 ion-content {
-  --background: #f9fafb; /* Blau clar (primari) */
-  padding-bottom: 60px;
+  --background: linear-gradient(135deg, #fce3ec, #ffe6fa);
+  padding: 16px;
+  padding-bottom: 80px;
+  font-family: 'Segoe UI', Roboto, sans-serif;
 }
 
-.upload-button {
+/* Botó flotant de pujada de fitxers */
+ion-button.upload-button {
+  --background: linear-gradient(135deg, #ff6ec4, #7873f5);
+  --border-radius: 50%;
+  --box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+  width: 64px;
+  height: 64px;
   position: fixed;
-  bottom: 70px;
-  right: 20px;
-  background-color: #8e44ad; /* Violeta (primari) */
-  border-radius: 10px;
-  height: 60px;
-  width: 60px;
+  bottom: 25px;
+  right: 25px;
+  z-index: 1000;
   display: flex;
-  justify-content: center;
   align-items: center;
-  box-shadow: 0px 3px 8px rgba(0, 0, 0, 0.2);
-  z-index: 10;
+  justify-content: center;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .upload-button:hover {
-  background-color: #9b59b6; /* Violeta clar (secundari) */
+  transform: scale(1.1);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
 }
 
 .upload-icon {
-  width: 30px;
-  height: 30px;
+  width: 28px;
+  height: 28px;
+  filter: brightness(0) invert(1);
 }
 
-ion-grid {
-  padding: 10px;
+/* Targetes multimèdia */
+ion-card.media-card {
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.08);
+  background: linear-gradient(135deg, #ffffff, #f9f9ff);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  min-height: 320px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
-ion-card {
-  border-radius: 12px;
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-  margin-bottom: 20px;
-  background-color: white;
+ion-card.media-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 26px rgba(0, 0, 0, 0.12);
 }
 
 ion-card-header {
-  background-color: #f4f7f6; /* Verd clar (secundari) */
-  padding: 10px;
-  border-top-left-radius: 12px;
-  border-top-right-radius: 12px;
-  text-align: center;
-}
-
-ion-card-title {
-  font-size: 16px;
-  color: #333;
-}
-
-ion-card-content {
-  padding: 15px;
-}
-
-ion-item {
+  background-color: #f0f4ff;
   padding: 0;
 }
 
-ion-label p {
-  margin: 5px 0;
-  font-size: 14px;
-  color: #777; /* Grís (secundari) */
+ion-card-header img {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+  object-position: center;
+  border-bottom: 3px solid #e0e0f0;
 }
 
 ion-card-footer {
-  padding: 10px;
+  padding: 16px 14px 12px;
+  background-color: #fff;
+  flex-grow: 1;
+  border-top: 1px solid #eee;
+  border-bottom-left-radius: 18px;
+  border-bottom-right-radius: 18px;
+}
+
+/* Element d’usuari amb avatar */
+ion-item {
+  --background: transparent;
+  --min-height: 44px;
+  --padding-start: 0;
+  --inner-padding-end: 0;
+  --padding-end: 0;
 }
 
 ion-avatar img {
+  border: 3px solid #ff6ec4;
   border-radius: 50%;
-  width: 40px;
-  height: 40px;
+  width: 48px;
+  height: 48px;
+  object-fit: cover;
+  transition: transform 0.2s ease;
 }
 
-ion-card-footer ion-item {
-  display: flex;
-  align-items: center;
+ion-avatar img:hover {
+  transform: rotate(3deg) scale(1.05);
 }
 
 ion-card-footer ion-label {
-  margin-left: 10px;
-  font-size: 14px;
+  font-size: 15px;
+  font-weight: 600;
   color: #333;
 }
 
-@media (max-width: 767px) {
-  ion-col {
-    padding: 5px;
-  }
+ion-label p {
+  margin: 4px 0 0 0;
+  font-size: 13px;
+  color: #777;
+  font-style: italic;
 }
 
+/* Grid i marges */
+ion-grid {
+  padding: 0;
+}
+
+ion-col {
+  padding: 12px;
+}
+
+/* Adaptació mòbil */
+@media (max-width: 767px) {
+  ion-col {
+    padding: 8px;
+  }
+
+  ion-card-header img {
+    height: 180px;
+  }
+
+  ion-card.media-card {
+    min-height: 300px;
+  }
+
+  ion-button.upload-button {
+    width: 56px;
+    height: 56px;
+  }
+
+  .upload-icon {
+    width: 24px;
+    height: 24px;
+  }
+}
 </style>
