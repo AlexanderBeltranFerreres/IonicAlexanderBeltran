@@ -16,7 +16,7 @@
           <ion-card-header>
             <img :src="getPreviewSrc(item)" alt="Previsualització" />
           </ion-card-header>
-          <ion-label>
+          <ion-label class="file-label">
             <p class="file-date">Creat: {{ formatDate(item.created_at) }}</p>
             <p class="file-date">Modificat: {{ formatDate(item.updated_at) }}</p>
           </ion-label>
@@ -197,7 +197,7 @@ ion-label {
 @media (max-width: 767px) {
   .file-item {
     flex-direction: column;
-    align-items: flex-start;
+    align-items: stretch;
   }
 
   ion-card-header {
@@ -210,11 +210,23 @@ ion-label {
     width: 100%;
   }
 
+  ion-label {
+    width: 100%;
+    margin-top: 8px;
+  }
+
   .delete-button {
     width: 100%;
-    margin-left: 0;
-    margin-top: 12px;
+    margin: 12px 0 0 0;
+    align-self: stretch;
+    text-align: center;
+  }
+
+  .delete-button:hover {
+    background: linear-gradient(135deg, #e53935, #d81b60);
+    transform: scale(1.05);
   }
 }
+
 </style>
 
